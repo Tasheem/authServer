@@ -32,7 +32,7 @@ export async function login(req, res) {
     } catch(err) {
         console.log('Rejected promise returned in loginResource with requestLogin() function.')
         console.log('Rejection Value: ' + err + ' Status Code');
-        res.status(parseInt(err)).end();
+        res.status(502).end();
         return;
     }
 
