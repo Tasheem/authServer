@@ -1,4 +1,4 @@
-import requestBooks from '../outboundRequests/requestBooks';
+import requestBooks from '../outboundRequests/requestBooks.js';
 
 export async function getBooks(req, res) {
     res.set({
