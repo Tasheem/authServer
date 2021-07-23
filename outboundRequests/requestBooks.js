@@ -6,7 +6,7 @@ export default {
             let options = {
                 host: 'localhost',
                 port: 7000,
-                path: '/api/book',
+                path: '/api/books',
                 method: 'GET',
                 headers: {
                     'X-Forwarded-For': `${origin}`,
