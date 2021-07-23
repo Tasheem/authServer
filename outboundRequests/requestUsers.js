@@ -14,8 +14,8 @@ export default function requestUsers(origin) {
         };
 
         let req = http.request(options, (userServerResponse) => {
-            if(userServerResponse.statusCode === 401)
-                reject('login required');
+            if(userServerResponse.statusCode === 403)
+                reject(userServerResponse.statusMessage);
             
             userServerResponse.setEncoding('utf8');
     
