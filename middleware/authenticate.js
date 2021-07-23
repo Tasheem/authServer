@@ -30,12 +30,12 @@ export default async function authenticate(req, res, next) {
     let decodedToken = null;
     try {
         decodedToken = await jwt.verifyJWT(token);
+        console.log(`id claim: ${decodedToken.id}`);
     } catch(err) {
         console.log('Error with verifyJWT in authenticate.js')
         console.log(err);
     }
 
-    console.log(`id claim: ${decodedToken.id}`);
 
     let origin = req.get('Origin');
     let ok = null;
