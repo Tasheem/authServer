@@ -18,7 +18,7 @@ app.options('/api/login', preflightLogin);
 app.get('/api/user', getUsers);
 app.options('/api/user', preflightUser);
 
-app.get('/api/book', getBooks);
+app.get('/api/books', getBooks);
 app.options('/api/books', preflightBooks);
 
 app.listen(port, () => {
