@@ -4,7 +4,7 @@ const KEY = 'secretKey';
 
 export default {
     createJWT(userID) {
-        console.log('Create Reached.');
+        console.log('Create JWT Reached.');
 
         let token = jwt.sign({
             id: userID
@@ -15,7 +15,7 @@ export default {
 
     verifyJWT(token) {
         return new Promise((resolve, reject) => {
-            console.log('Verify Reached.');
+            console.log('Verify JWT Reached.');
             
             let decodedToken = null;
             // This is a hack to make Node.js wait for the verify function to return.
