@@ -3,6 +3,14 @@ import requestLogin from '../outboundRequests/requestLogin.js';
 import jwt from '../jwtUtilities/jwt.js';
 
 export async function login(req, res) {
+    res.set({
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type, Access-Control-Expose-Headers',
+        'Access-Control-Expose-Headers': 'Authorization',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Credentials': true
+    });
+
     if(req.header('Content-Type') != 'application/json') {
         // Unsupported media type.
         res.status(415).send('Unsupported Media Type');
@@ -15,14 +23,6 @@ export async function login(req, res) {
         res.status(400).end('Data Unreadable.');
         return;
     }
-
-    res.set({
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
-        'Access-Control-Allow-Headers': 'Authorization, Content-Type, Access-Control-Expose-Headers',
-        'Access-Control-Expose-Headers': 'Authorization',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Credentials': true
-    });
     
     let origin = req.get('Origin');
     // console.log(`Origin: ${origin}`);
