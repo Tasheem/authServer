@@ -2,6 +2,7 @@ import isAuthenticated from "../outboundRequests/checkAuthentication.js";
 import jwt from '../jwtUtilities/jwt.js';
 
 export default async function authenticate(req, res, next) {
+    res.set('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
     let destination = req.originalUrl;
     console.log(`Destination: ${destination}`);
 
@@ -22,8 +23,7 @@ export default async function authenticate(req, res, next) {
     if(authHeader === undefined || authHeader === null) {
         console.log('No Authorization Header');
 
-        res.status(401).set('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
-        .end('Authorization Header required.');
+        res.status(401).end('Authorization Header required.');
     }
 
     let token = authHeader.replace('Bearer ', '');
