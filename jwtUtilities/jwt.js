@@ -8,7 +8,7 @@ export default {
 
         let token = jwt.sign({
             id: userID
-        }, KEY, {expiresIn: 60})
+        }, KEY, {expiresIn: 60 * 60})
 
         return token;
     },
