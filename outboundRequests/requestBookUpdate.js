@@ -1,8 +1,8 @@
 import http from 'http';
 
 export default function requestBookUpdate(payload, requestOrigin) {
-    console.log(`requestBookUpdate() -> ID: ${payload.Id}`);
-    console.log(`requestBookUpdate() -> Price ${payload.Price}`);
+    console.log(`requestBookUpdate() -> ID: ${payload.id}`);
+    console.log(`requestBookUpdate() -> Price ${payload.price}`);
     console.log(`requestBookUpdate() -> Origin: ${requestOrigin}`);
     
     let path = `/api/books`;
@@ -38,11 +38,11 @@ export default function requestBookUpdate(payload, requestOrigin) {
         });
 
         let body = {};
-        body.Id = payload.Id;
-        body.Name = "";
-        body.AuthorFirstName = "";
-        body.AuthorLastName = "";
-        body.Price = payload.Price;
+        body.id = payload.id;
+        body.name = "";
+        body.authorFirstName = "";
+        body.authorLastName = "";
+        body.price = payload.price;
 
         let json = JSON.stringify(body);
         console.log(`JSON: ${json}`);
