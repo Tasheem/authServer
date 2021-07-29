@@ -3,7 +3,7 @@ import { getRoot, postRoot } from './routes/rootResource.js';
 import { login, preflightLogin } from './routes/loginResource.js';
 import { getUsers, preflightUser } from './routes/userResource.js';
 import authenticate from './middleware/authenticate.js';
-import { getBooks, updateBook, deleteBook, preflightBooks } from './routes/bookResource.js';
+import { getBooks, postBook, updateBook, deleteBook, preflightBooks } from './routes/bookResource.js';
 
 const app = express();
 const port = 4000;
@@ -19,6 +19,7 @@ app.get('/api/user', getUsers);
 app.options('/api/user', preflightUser);
 
 app.get('/api/books', getBooks);
+app.post('/api/books', postBook);
 app.put('/api/books', updateBook);
 app.delete('/api/books', deleteBook);
 app.options('/api/books', preflightBooks);

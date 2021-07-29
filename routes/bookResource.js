@@ -1,6 +1,7 @@
 import requestBookDeletion from '../outboundRequests/requestBookDeletion.js';
 import requestBooks from '../outboundRequests/requestBooks.js';
 import requestBookUpdate from '../outboundRequests/requestBookUpdate.js';
+import requestBookCreation from '../outboundRequests/requestBookCreation.js';
 
 export async function getBooks(req, res) {
     res.set({
@@ -20,6 +21,28 @@ export async function getBooks(req, res) {
     }
 }
 
+export async function postBook(req, res) {
+    res.set({
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type'
+    })
+
+    let origin = req.get('Origin');
+    let payload = req.body;
+    console.log(`Origin: ${origin}`);
+
+    try {
+        let resourceLocation = await requestBookCreation(payload, origin);
+        console.log('RESOURCE: ' + resourceLocation);
+        res.set('Location', resourceLocation).status(201).send();
+    } catch(error) {
+        console.error('ERROR with requestBookCreation() call in bookResource');
+        console.log('Error: ' + error);
+        console.log(resourceLocation);
+        res.status(502).end();
+    }
+}
+
 export async function updateBook(req, res) {
     res.set({
         'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
@@ -31,10 +54,8 @@ export async function updateBook(req, res) {
     console.log(`Payload: ${payload.Id}`);
 
     try {
-        // TODO: send PUT request to Go server.
-        // Get params to pass into async function below.
-        let response = await requestBookUpdate(payload, origin);
-        res.status(parseInt(response)).send();
+        let status = await requestBookUpdate(payload, origin);
+        res.status(parseInt(status)).send();
     } catch(error) {
         console.error('ERROR with requestBookUpdate() call in bookResource');
         console.log('Error: '+ error);
@@ -52,10 +73,8 @@ export async function deleteBook(req, res) {
     let origin = req.get('Origin');
 
     try {
-        // TODO: send PUT request to Go server.
-        // Get params to pass into async function below.
-        let response = await requestBookDeletion(id, origin);
-        res.status(parseInt(response)).send();
+        let status = await requestBookDeletion(id, origin);
+        res.status(parseInt(status)).send();
     } catch(error) {
         console.error('ERROR with requestBookDeletion() call in bookResource');
         console.log('Error: '+ error);
