@@ -5,7 +5,7 @@ export default function isAuthenticated(id, origin) {
         let options = {
             host: 'localhost',
             port: 8000,
-            path: `/api/user?Id=${id}`,
+            path: `/api/users?id=${id}`,
             method: 'GET',
             headers: {
                 'X-Forwarded-For': `${origin}`,

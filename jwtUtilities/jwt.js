@@ -18,7 +18,6 @@ export default {
             console.log('Verify JWT Reached.');
             
             let decodedToken = null;
-            // This is a hack to make Node.js wait for the verify function to return.
             jwt.verify(token, KEY, function(err, decoded) {
                 if(err) {
                     console.error(err);
@@ -36,5 +35,12 @@ export default {
             else 
                 resolve(decodedToken);
         });
+    },
+
+    async extractUserID(token) {
+        let id = null;
+        let decodedToken = await this.verifyJWT(token);
+        id = decodedToken.id.toString();
+        return id;
     }
 }

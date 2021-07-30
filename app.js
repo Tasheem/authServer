@@ -1,7 +1,7 @@
 import express from 'express';
 import { getRoot, postRoot } from './routes/rootResource.js';
 import { login, preflightLogin } from './routes/loginResource.js';
-import { getUsers, preflightUser } from './routes/userResource.js';
+import { getUsers, updateUser, preflightUser } from './routes/userResource.js';
 import authenticate from './middleware/authenticate.js';
 import { getBooks, postBook, updateBook, deleteBook, preflightBooks } from './routes/bookResource.js';
 
@@ -15,8 +15,9 @@ app.post('/api', postRoot);
 app.post('/api/login', login);
 app.options('/api/login', preflightLogin);
 
-app.get('/api/user', getUsers);
-app.options('/api/user', preflightUser);
+app.get('/api/users', getUsers);
+app.put('/api/users', updateUser);
+app.options('/api/users', preflightUser);
 
 app.get('/api/books', getBooks);
 app.post('/api/books', postBook);

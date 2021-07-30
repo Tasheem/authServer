@@ -29,6 +29,7 @@ export async function login(req, res) {
     let id = null;
     try {
         id = await requestLogin(login, origin);
+        console.log(`LoginResource id variable: ${id}`);
     } catch(err) {
         console.log('Rejected promise returned in loginResource with requestLogin() function.')
         console.log('Rejection Value: ' + err + ' Status Code');

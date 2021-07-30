@@ -16,7 +16,7 @@ export default function requestLogin(login, origin) {
         console.log(`Username Without Spaces: ${login.username}`);
     }
 
-    let path = `/api/user?Username=${login.username}&Password=${login.password}`;
+    let path = `/api/users?Username=${login.username}&Password=${login.password}`;
     let options = {
         host: 'localhost',
         port: 8000,
@@ -40,7 +40,7 @@ export default function requestLogin(login, origin) {
                 // console.log(`BODY: ${chunk}`);
                 try {
                     let body = JSON.parse(chunk);
-                    resolve(body.Id);
+                    resolve(body.id);
                 } catch(err) {
                     console.log(err);
                     reject('500');

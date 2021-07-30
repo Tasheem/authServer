@@ -24,13 +24,15 @@ export default async function authenticate(req, res, next) {
         console.log('No Authorization Header');
 
         res.status(401).end('Authorization Header required.');
+        return;
     }
 
     let token = authHeader.replace('Bearer ', '');
+    console.log(`token: ${token}`);
     let decodedToken = null;
     try {
         decodedToken = await jwt.verifyJWT(token);
-        console.log(`id claim: ${decodedToken.id}`);
+        console.log(`id claim: ${Object.keys(decodedToken)}`);
     } catch(err) {
         console.log('Error with verifyJWT in authenticate.js')
         console.log(err);

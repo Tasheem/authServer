@@ -5,7 +5,7 @@ export default function requestUsers(origin) {
         let options = {
             host: 'localhost',
             port: 8000,
-            path: '/api/user',
+            path: '/api/users',
             method: 'GET',
             headers: {
                 'X-Forwarded-For': `${origin}`,
