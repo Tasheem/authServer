@@ -2,11 +2,12 @@ import requestUsers from '../outboundRequests/requestUsers.js';
 import requestUserUpdate from '../outboundRequests/requestUserUpdate.js';
 import requestUserCreation from '../outboundRequests/requestUserCreation.js';
 import jwt from '../jwtUtilities/jwt.js';
+import requestUserDeletion from '../outboundRequests/requestUserDeletion.js';
 
 export async function getUsers(req, res) {
     res.set({
         'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
-        'Access-Control-Allow-Headers': 'Authorization, Content-Type'
+        'Access-Control-Allow-Headers': 'Authorization'
     });
 
     let origin = req.get('Origin');
@@ -47,11 +48,8 @@ export async function updateUser(req, res) {
     let origin = req.get('Origin');
 
     const authHeader = req.get('Authorization');
-    console.log('authHeader: ' + authHeader);
     const token = authHeader.replace('Bearer ', '');
-    console.log('token: ' + token);
     let decodedToken = await jwt.verifyJWT(token);
-    console.log(`decodeToken: ${decodedToken}`);
     let userID = decodedToken.id;
     console.log(`userID: ${userID}`);
 
@@ -60,6 +58,29 @@ export async function updateUser(req, res) {
         res.status(status).send();
     } catch(error) {
         console.error('ERROR with requestUsers() call in UserResource -> ' + error);
+        res.status(502).end();
+    }
+}
+
+export async function deleteUser(req, res) {
+    res.set({
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+        'Access-Control-Allow-Headers': 'Authorization'
+    });
+
+    let origin = req.get('Origin');
+
+    const authHeader = req.get('Authorization');
+    const token = authHeader.replace('Bearer ', '');
+    const decodedToken = await jwt.verifyJWT(token);
+    const userID = decodedToken.id;
+    console.log(`userID: ${userID}`);
+
+    try {
+        let status = await requestUserDeletion(userID, origin);
+        res.status(status).send();
+    } catch(error) {
+        console.error('ERROR with requestUserDeletion() call in UserResource -> ' + error);
         res.status(502).end();
     }
 }
