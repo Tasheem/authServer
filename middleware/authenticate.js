@@ -16,6 +16,10 @@ export default async function authenticate(req, res, next) {
         console.log('Login request skipping auth process.');
         next();
         return;
+    } else if(req.method === 'POST' && destination === '/api/users') {
+        console.log('Creating User --> skipping authentication process.');
+        next();
+        return;
     }
 
     let authHeader = req.get('Authorization');

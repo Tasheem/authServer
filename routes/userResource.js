@@ -1,5 +1,6 @@
 import requestUsers from '../outboundRequests/requestUsers.js';
 import requestUserUpdate from '../outboundRequests/requestUserUpdate.js';
+import requestUserCreation from '../outboundRequests/requestUserCreation.js';
 import jwt from '../jwtUtilities/jwt.js';
 
 export async function getUsers(req, res) {
@@ -16,6 +17,23 @@ export async function getUsers(req, res) {
     } catch(error) {
         console.error('ERROR with requestUsers() call in UserResource: ');
         console.error(error);
+        res.status(502).end();
+    }
+}
+
+export async function createUser(req, res) {
+    res.set({
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type'
+    });
+
+    let origin = req.get('Origin');
+
+    try {
+        let json = await requestUserCreation(req.body, origin);
+        res.status(200).set('Content-Type', 'application/json').send(json);
+    } catch(error) {
+        console.error('ERROR with requestUserCreation() call in UserResource: ' + error);
         res.status(502).end();
     }
 }
