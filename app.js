@@ -10,7 +10,6 @@ const port = 4000;
 app.use(express.json(), authenticate);
 
 app.get('/api', getRoot);
-app.post('/api', postRoot);
 
 app.post('/api/login', login);
 app.options('/api/login', preflightLogin);

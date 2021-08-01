@@ -12,7 +12,7 @@ export default async function authenticate(req, res, next) {
         console.log('Preflight request is skipping auth process.');
         next();
         return;
-    } else if(destination === '/api/login') {
+    } else if(destination === '/api/login' || destination === '/api') {
         console.log('Login request skipping auth process.');
         next();
         return;
