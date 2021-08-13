@@ -1,5 +1,5 @@
 import express from 'express';
-import { getRoot, postRoot } from './routes/rootResource.js';
+import { getRoot } from './routes/rootResource.js';
 import { login, preflightLogin } from './routes/loginResource.js';
 import { getUsers, createUser, updateUser, deleteUser, preflightUser } from './routes/userResource.js';
 import authenticate from './middleware/authenticate.js';
